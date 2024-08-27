@@ -1,5 +1,19 @@
-const main = () => {
-  return 0;
+import fetchData from "./src/fetchData";
+import { PhotoMetadata } from "./src/types";
+import { DEFAULT_OFFSET } from "./src/config";
+import { convertDownloadedData } from "./src/tools";
+
+const main = async () => {
+  let offset = 0;
+  const photosData: PhotoMetadata[] = [];
+
+  while (true) {
+    const data = await fetchData(offset);
+    if (data.length <= 0) return;
+
+    photosData.push(...data.map(convertDownloadedData));
+    offset += DEFAULT_OFFSET;
+  }
 };
 
 main();
