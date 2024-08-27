@@ -2,6 +2,7 @@ import fetchData from "./src/fetchData";
 import { PhotoMetadata } from "./src/types";
 import { DEFAULT_OFFSET } from "./src/config";
 import { convertDownloadedData } from "./src/tools";
+import { savePhotosMetadataToFile } from "./src/saving";
 
 const main = async () => {
   let offset = 0;
@@ -9,38 +10,13 @@ const main = async () => {
 
   while (true) {
     const data = await fetchData(offset);
-    if (data.length <= 0) return;
+    if (data.length <= 0) break;
 
     photosData.push(...data.map(convertDownloadedData));
     offset += DEFAULT_OFFSET;
   }
+
+  savePhotosMetadataToFile(photosData);
 };
 
 main();
-
-// const main = async () => {
-//   let offset = 0;
-//   const photosData = [];
-
-//   while (true) {
-//     const data = await fetchData(CURRENT_COOKIE, CURRENT_HASH, offset);
-//     if (data.length <= 0) break;
-
-//     console.log(`Downloaded data length: ${data.length} with offset ${offset}`);
-//     const convertedData = convertPhotosData(data);
-//     saveMetadatasToFile(convertedData);
-
-//     photosData.push(
-//       ...convertedData.map((photo) => {
-//         return {
-//           id: photo.id,
-//           url: photo.photo_url,
-//         };
-//       })
-//     );
-
-//     offset += DEFAULT_OFFSET;
-//   }
-
-//   downloadPhotos(photosData);
-// };

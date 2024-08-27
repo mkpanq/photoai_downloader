@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc",
+    "start": "node --env-file=.env --env-file=.env.local dist/index.js",
+    "build_start": "pnpm build && pnpm start"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -8,10 +8,10 @@ export const convertDownloadedData = (data: any): PhotoMetadata => {
     model_strength: data.model_strength,
     manual_prompt: data.manual_prompt,
     details: {
-      emotion: data.details.emotion,
-      place: data.details.place,
-      camera: data.details.camera,
-      film: data.details.film,
+      emotion: data.emotion,
+      place: data.place,
+      camera: data.camera,
+      film: data.film,
     },
   };
 };
