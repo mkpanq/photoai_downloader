@@ -1,4 +1,39 @@
-import { CURRENT_COOKIE, CURRENT_HASH } from "./config";
+import { CURRENT_COOKIE, CURRENT_HASH, DEFAULT_OFFSET } from "./config";
+import { PhotoMetadata } from "./types";
+
+const downloadPhotosMetadata = async () => {
+  let offset = 0;
+  const photosData: PhotoMetadata[] = [];
+
+  while (true) {
+    const data = await fetchData(offset);
+    const dataSize = data.length;
+
+    if (dataSize <= 0) break;
+    console.log(`Downloading ${dataSize} photos metadata...`);
+
+    photosData.push(...data.map(convertDownloadedData));
+    offset += DEFAULT_OFFSET;
+  }
+
+  return photosData;
+};
+
+const convertDownloadedData = (data: any): PhotoMetadata => {
+  return {
+    id: data.photo_id,
+    photo_url: data.photo_url,
+    seed: data.seed,
+    model_strength: data.model_strength,
+    manual_prompt: data.manual_prompt,
+    details: {
+      emotion: data.emotion,
+      place: data.place,
+      camera: data.camera,
+      film: data.film,
+    },
+  };
+};
 
 const fetchData = async (offset: number) => {
   return await fetch(
@@ -34,4 +69,4 @@ const fetchData = async (offset: number) => {
   ).then((response) => response.json());
 };
 
-export default fetchData;
+export default downloadPhotosMetadata;
