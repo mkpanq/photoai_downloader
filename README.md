@@ -1,6 +1,6 @@
 # PhotoAI Camera Roll Downloader
 
-This project is a simple TypeScript script designed to download your entire camera roll from photoai.com in one run. Due to the large number of photos (over 600), this script helps automate the download process.
+This project is a simple TypeScript script designed to download your entire camera roll from [photoai.com](https://photoai.com/) in one run. Due to the large number of photos (over 600), this script helps automate the download process.
 
 ## Setup
 
