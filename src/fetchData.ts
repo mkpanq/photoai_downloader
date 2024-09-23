@@ -1,16 +1,25 @@
-import { CURRENT_COOKIE, CURRENT_HASH, DEFAULT_OFFSET } from "./config";
+import {
+  BASE_URL,
+  CURRENT_COOKIE,
+  CURRENT_HASH,
+  DEFAULT_OFFSET,
+} from "./config";
 import { PhotoMetadata } from "./types";
 
 const downloadPhotosMetadata = async () => {
   let offset = 0;
   const photosData: PhotoMetadata[] = [];
+  let totalData = 0;
 
   while (true) {
     const data = await fetchData(offset);
     const dataSize = data.length;
 
-    if (dataSize <= 0) break;
-    console.log(`Downloading ${dataSize} photos metadata...`);
+    if (dataSize <= 1) break;
+    totalData += dataSize;
+    console.log(
+      `Downloading ${dataSize} photos metadata... Total: ${totalData}`
+    );
 
     photosData.push(...data.map(convertDownloadedData));
     offset += DEFAULT_OFFSET;
@@ -37,7 +46,7 @@ const convertDownloadedData = (data: any): PhotoMetadata => {
 
 const fetchData = async (offset: number) => {
   return await fetch(
-    `https://photoai.com/?action=get-camera-roll&offset=${offset}&query=&mode=camera&hash=${CURRENT_HASH}`,
+    `${BASE_URL}&offset=${offset}&query=&mode=camera&hash=${CURRENT_HASH}`,
     {
       headers: {
         accept: "application/json, text/javascript, */*; q=0.01",

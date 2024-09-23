@@ -41,7 +41,6 @@ const fetchAndSaveSinglePhoto = async (
   photo: PhotoMetadata,
   numeration: string
 ) => {
-  console.log(photo);
   return fetch(photo.photo_url).then((response) => {
     if (!response.ok || response.body === null) {
       throw new Error(

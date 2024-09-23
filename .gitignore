@@ -3,5 +3,4 @@ node_modules
 dist
 .env.*
 downloaded_data
-
-
+.DS_Store

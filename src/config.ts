@@ -1,11 +1,12 @@
 import process from "process";
-import { RequestCookie, RequestHash } from "./types";
+import { RequestBaseURL, RequestCookie, RequestHash } from "./types";
 import * as fs from "fs";
 
 export const CURRENT_COOKIE: RequestCookie = process.env.CURRENT_COOKIE;
 export const CURRENT_HASH: RequestHash = process.env.CURRENT_HASH;
+export const BASE_URL: RequestBaseURL = process.env.BASE_URL;
 
-export const DEFAULT_OFFSET = 19;
+export const DEFAULT_OFFSET = 100;
 
 const DOWNLOADED_DATA_FOLDER_NAME = "downloaded_data";
 export const PHOTOS_FOLDER_NAME = `${DOWNLOADED_DATA_FOLDER_NAME}/photos`;

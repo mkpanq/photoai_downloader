@@ -1,5 +1,6 @@
 export type RequestCookie = string | undefined;
 export type RequestHash = string | undefined;
+export type RequestBaseURL = string | undefined;
 
 export type PhotoMetadata = {
   id: string;
